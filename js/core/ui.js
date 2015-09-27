@@ -93,15 +93,30 @@ var ui = {
     }
     for (var set in config.markup.emoticons) {
       var list = $('#emoticonsList-' + set);
-      for (var code in config.markup.emoticons[set].codes) {
-        list.append($('<a class="insert-text"></a>')
-          .attr('href', "javascript:void('" + code.replace(/'/g, '\\\'') + "');")
-          .attr('title', code)
+      for (var emotecat in config.markup.emoticons[set].codes) {
+        list.append($('<span class="emoticon-list-sidebar-category" dir="ltr"></span>')
+          .attr('id', 'emoticonsCategory-' + emotecat)
+        );
+        var category = $('#emoticonsCategory-' + emotecat);
+        category.append($('<a class="open-emote-subcategory"></a>')
+          .attr('href', "javascript:void('" + emotecat.replace(/'/g, '\\\'') + "');")
           .append($('<img />')
-            .attr('src', config.markup.emoticons[set].baseURL + config.markup.emoticons[set].codes[code])
+            .attr('src', config.markup.emoticons[set].baseURL + emotecat)
             .attr('alt', code)
           )
         );
+         category.append($('<span class="emoteBin"></span>');
+         var emotebin = $('#emoticonsCategory-' + emotecat + ' .emoteBin');
+        for (var code in emotecat) {
+          emotebin.append($('<a class="insert-text"></a>')
+            .attr('href', "javascript:void('" + code.replace(/'/g, '\\\'') + "');")
+            .attr('title', code)
+            .append($('<img />')
+              .attr('src', config.markup.emoticons[set].baseURL + config.markup.emoticons[set].codes[code])
+              .attr('alt', code)
+            )
+          );
+        }
       }
     }
 
