@@ -92,30 +92,36 @@ var ui = {
         .appendTo(ui.dom.emoticonTrayContainer);
     }
     for (var set in config.markup.emoticons) {
-      var list = $('#emoticonsList-' + set);
-      for (var emotecat in config.markup.emoticons[set].codes) {
-        list.append($('<span class="emoticon-list-sidebar-category" dir="ltr"></span>')
-          .attr('id', 'emoticonsCategory-' + emotecat)
-        );
-        var category = $('#emoticonsCategory-' + emotecat);
-        category.append($('<a class="open-emote-subcategory"></a>')
-          .attr('href', "javascript:void('" + emotecat.replace(/'/g, '\\\'') + "');")
-          .append($('<img />')
-            .attr('src', config.markup.emoticons[set].baseURL + emotecat)
-            .attr('alt', code)
-          )
-        );
-         category.append($('<span class="emoteBin"></span>');
-         var emotebin = $('#emoticonsCategory-' + emotecat + ' .emoteBin');
-        for (var code in emotecat) {
-          emotebin.append($('<a class="insert-text"></a>')
-            .attr('href', "javascript:void('" + code.replace(/'/g, '\\\'') + "');")
-            .attr('title', code)
+          console.log(config.markup.emoticons[set].subCategoried);
+      if (config.markup.emoticons[set].subCategoried == true) {
+        var list = $('#emoticonsList-' + set);
+        for (var emotecat in config.markup.emoticons[set].codes) {
+          console.log(emotecat.replace(/\./g, "\\."));
+          list.append($('<span class="emoticon-list-sidebar-category" dir="ltr"></span>')
+            .attr('id', 'emoticonsCategory-' + emotecat)
+          );
+          var category = $('#emoticonsCategory-' + emotecat.replace(/\./g, "\\."));
+          category.append($('<a class="open-emote-subcategory"></a>')
+            .attr('href', "javascript:void('" + emotecat.replace(/'/g, '\\\'') + "');")
+            .attr('data-toggle', emotecat.replace(/\./g, '\\.'))
             .append($('<img />')
-              .attr('src', config.markup.emoticons[set].baseURL + config.markup.emoticons[set].codes[code])
+              .attr('src', config.markup.emoticons[set].baseURL + emotecat)
               .attr('alt', code)
             )
           );
+           category.append($('<span class="emoteBin" style="display: none;"></span>'));
+           var emotebin = $('#emoticonsCategory-' + emotecat.replace(/\./g, "\\.") + ' .emoteBin');
+          for (var code in config.markup.emoticons[set].codes[emotecat]) {
+            console.log(config.markup.emoticons[set].codes[emotecat][code]);
+            emotebin.append($('<a class="insert-text"></a>')
+              .attr('href', "javascript:void('" + code.replace(/'/g, '\\\'') + "');")
+              .attr('title', code)
+              .append($('<img />')
+                .attr('src', config.markup.emoticons[set].baseURL + config.markup.emoticons[set].codes[emotecat][code])
+                .attr('alt', code)
+              )
+            );
+          }
         }
       }
     }
@@ -369,6 +375,11 @@ var ui = {
       var audio = !config.settings.notifications.soundEnabled;
       chat.setSetting('notifications.soundEnabled', audio);
       $(this).toggleClass('off', !audio);
+    });
+    
+    // open/close ponicon subcategories
+    $('.open-emote-subcategory').click(function() {
+      $("#emoticonsCategory-"+$(this).data("toggle")+" .emoteBin").toggle();
     });
 
     // scrolling up the chat list turns off auto-scrolling.

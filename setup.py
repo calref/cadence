@@ -73,7 +73,8 @@ def generate_emoticons(cdn_url, packs, src_path):
             if 'codes' in data:
                 output['packages'][pack] = {
                     'baseURL': baseURL,
-                    'codes': data['codes']
+                    'codes': data['codes'],
+                    'subCategoried': data['subCategoried']
                 }
                 if 'title' in data and 'icon' in data:
                     output['sidebars'][pack] = {
