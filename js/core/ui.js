@@ -92,11 +92,9 @@ var ui = {
         .appendTo(ui.dom.emoticonTrayContainer);
     }
     for (var set in config.markup.emoticons) {
-          console.log(config.markup.emoticons[set].subCategoried);
       if (config.markup.emoticons[set].subCategoried == true) {
         var list = $('#emoticonsList-' + set);
         for (var emotecat in config.markup.emoticons[set].codes) {
-          console.log(emotecat.replace(/\./g, "\\."));
           list.append($('<span class="emoticon-list-sidebar-category" dir="ltr"></span>')
             .attr('id', 'emoticonsCategory-' + emotecat)
           );
@@ -112,7 +110,6 @@ var ui = {
            category.append($('<span class="emoteBin" style="display: none;"></span>'));
            var emotebin = $('#emoticonsCategory-' + emotecat.replace(/\./g, "\\.") + ' .emoteBin');
           for (var code in config.markup.emoticons[set].codes[emotecat]) {
-            console.log(config.markup.emoticons[set].codes[emotecat][code]);
             emotebin.append($('<a class="insert-text"></a>')
               .attr('href', "javascript:void('" + code.replace(/'/g, '\\\'') + "');")
               .attr('title', code)
