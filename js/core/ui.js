@@ -120,6 +120,18 @@ var ui = {
             );
           }
         }
+      } else {
+        var list = $('#emoticonsList-' + set);
+        for (var code in config.markup.emoticons[set].codes) {
+          list.append($('<a class="insert-text"></a>')
+            .attr('href', "javascript:void('" + code.replace(/'/g, '\\\'') + "');")
+            .attr('title', code)
+            .append($('<img />')
+              .attr('src', config.markup.emoticons[set].baseURL + config.markup.emoticons[set].codes[code])
+              .attr('alt', code)
+            )
+          );
+        }
       }
     }
 
