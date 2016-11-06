@@ -1,0 +1,19 @@
+body {
+  font-family: sans-serif;
+  font-size: 0.9em;
+}
+h3 { font-size:1.3em }
+a { text-decoration:none }
+a:hover { text-decoration:underline }
+.author { font-weight:bold }
+#roster .user-self { font-weight:bold }
+.xmpp-room-current { font-weight:bold }
+.message .subject { font-weight:bold }
+.action, .message-type-local .body, .privmsg { font-style:italic }
+q { font-variant:small-caps }
+code {
+  font-size:1.2em;
+  white-space:pre-wrap;
+}
+#textColor, #helpList td.code { font-family:monospace }
+.dialog .ui-widget-header { font-size:1.2em; font-weight: bold }

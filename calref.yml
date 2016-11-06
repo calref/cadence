@@ -1,0 +1,69 @@
+config:
+  # Any configuration value from config/default.yml may be overridden here.
+  # ui:
+  #   title: cadence
+  xmpp:
+    # The domain of the XMPP server.
+    domain: calref.net
+    # The URL of the transport.
+    url: https://calref.net:5281/http-bind/
+    # The domain of the conference server.
+    muc: conference.calref.net
+    sessionAuth: https://calref.net/xmpp-auth.php
+
+  settings:
+    macros:
+      action:
+        - /me
+      online:
+        - /back
+
+  sounds:
+    - sound_1
+    - sound_2
+    - sound_3
+    - sound_4
+    - sound_5
+    - sound_6
+    - pidgin_alert
+    - pidgin_login
+    - pidgin_logout
+    - pidgin_receive
+    - pidgin_send
+    - whip
+    - slap
+    - meow
+    - lucia
+    - droneriots
+    - yay
+
+  ui:
+    title: Calamity Refuge
+    navigation:
+      Forum: https://calref.net/
+      Logs: https://calref.net/xmpp/log/
+      Files: https://files.calref.net/
+
+  version: 2.0.0-calref-dev
+
+install:
+  target: www
+  cdn:
+    target:
+    url: ''
+
+  styles:
+    - Carbon
+    - Helium
+    - Mercury
+    - Plum
+    - Selenium
+    - Stygium
+    - Sulfur
+    - Technetium
+    - Uranium
+  packs:
+    - ponicons
+  language: en
+  languages:
+    - en

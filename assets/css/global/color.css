@@ -1,0 +1,12 @@
+.author .user-affiliation-owner,
+#roster .user-affiliation-owner,
+.body.error, .message-type-headline .body { color: red }
+.author .user-affiliation-admin,
+#roster .user-affiliation-admin { color: #0a0 }
+.author .user-role-visitor,
+#roster .user-role-visitor,
+.author .user-role-undefined,
+.row.delayed .dateTime, .row.delayed .log-room { color: gray }
+.row:nth-child(even) { background:rgba(0,0,0,0.1) }
+.row:nth-child(odd) { background:rgba(0,0,0,0.5) }
+input[type=range], textarea { background: none }

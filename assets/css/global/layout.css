@@ -1,0 +1,233 @@
+/* Scale the page to the viewport. */
+html, body {
+  margin: 0;
+  height: 100%;
+}
+/* Scale the body pane to the viewport, including padding. */
+#body {
+  box-sizing: border-box;
+  padding: 15px 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#logo { float: right }
+#logo img {
+  vertical-align: middle;
+  padding-right: 5px;
+}
+h3 { white-space: nowrap }
+#roomContainer,
+.sidebar,
+#messagePane .row,
+#roster .row,
+#settings-textColor, #textColorClear { display: none }
+
+.sidebar { overflow-x: hidden }
+
+#loginContainer { display: inline }
+#navigation {
+  display: none;
+  float: right;
+  margin-right: 2em;
+}
+#navigation ul {
+  display: inline-block;
+  margin: 0;
+  padding-left: 1em;
+}
+#navigation li { display: inline }
+#navigation li:before { content: " | " }
+#navigation li:first-child:before { content: none }
+
+#header, #content { margin-bottom: 5px }
+/* The content pane fills up the screen height. */
+#content {
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+}
+
+#messagePane {
+  overflow-y: auto;
+  hyphens: auto;
+  word-wrap: break-word;
+  flex-grow: 1;
+  margin-right: 5px;
+}
+#messagePane .row {
+  padding: 2px 10px;
+  white-space: pre-wrap;
+}
+#messagePane img.emote {
+  vertical-align: middle;
+  margin-bottom: 2px;
+}
+#messagePane cite { margin-right: 5px }
+
+#sidebars { overflow-y: auto }
+
+#inputFieldContainer {
+  padding-right: 4px;
+}
+#inputField {
+  box-sizing: border-box;
+  resize: none;
+  padding: 5px;
+  width: 100%;
+  height: 100%;
+}
+#inputFieldContainer div.ui-wrapper {
+  top: 0 !important;
+  padding: 0!important;
+}
+#messageLength {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 1.5em;
+  padding: 2px;
+}
+h3 {
+  height: 30px;
+  padding: 4px 10px;
+  margin: 0px;
+  text-align: center;
+}
+.sidebar div {
+  margin: auto;
+  bottom: 0;
+}
+#roster div.row, .emoticon-list-sidebar {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 2px;
+}
+div.emoticon-header {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  margin-bottom: 15px;
+  z-index: 1;
+}
+.emoticon-search {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 99%;
+}
+.emoticon-list-sidebar { width: 280px }
+#footer { margin-top: 5px }
+#footer div { display: inline-block }
+
+#bbCodeContainer button { line-height: 1.4em }
+#bbCodeContainer button[value=b] { vertical-align: bottom }
+
+#footer #colorCodesContainer {
+  bottom: 48px;
+  left: 20px;
+  padding: 3px;
+  position: absolute;
+  z-index: 1;
+  display: none;
+}
+#body #colorCodesContainer a {
+  display: block;
+  float: left;
+  width: 20px;
+  height: 20px;
+  border-color: black;
+}
+#colorCodesContainer button {
+  height: 22px;
+  float: left;
+  display: block;
+}
+#emoticonsContainer {
+  padding: 3px;
+  vertical-align: middle;
+}
+#emoticonsContainer a {
+  margin-left: 2px;
+  margin-right: 1px;
+}
+#trayContainer {
+  float: right;
+  padding: 3px;
+  padding-right: 0px;
+}
+#trayContainer button,
+#trayContainer div {
+  display: inline-block;
+  margin: 0 2px;
+  width: 22px;
+  height: 22px;
+  vertical-align: middle;
+}
+
+#roster .user-show-icon {
+  height: 16px;
+  width: 16px;
+  margin-right: 2px;
+  vertical-align: middle;
+  display: inline-block;
+  background-repeat: no-repeat;
+}
+#sidebars, .sidebar {
+  box-sizing: border-box;
+  height: 100%;
+  left: 0 !important;
+}
+#helpList td {
+  padding: 4px 10px;
+  vertical-align: top;
+}
+#settingsList label, div.form-control { vertical-align: middle }
+div.form-control { float: right }
+#settingsList div.row {
+  clear: both;
+  padding: 3px;
+}
+#settingsList input[type=text],
+#settingsList input[type=range] { width: 9em }
+
+#footer #trayContainer div,
+#footer #trayContainer button { background-color: transparent }
+img.emoticon, img.rescale { vertical-align: middle }
+span.emote-alt, span.image-alt { display: none }
+
+span.hide-message {
+  float: right;
+  margin-top: 3px;
+}
+span.hidden {
+  display: none;
+  font-style: italic;
+  font-size: 90%;
+}
+span.hidden:after { content: "[hidden]" }
+button.soundTest, select.soundSelect { vertical-align: middle }
+
+.data-form label, .data-form-field {
+  width: 45%;
+  display: inline-block;
+  margin-bottom: 0.5em;;
+  margin-top: 0.5em;
+  vertical-align: middle;
+}
+.data-form label {
+  text-align: right;
+  padding-right: 2em;
+}
+.data-form br { clear: left }
+ul.ui-tabs-nav { display: flex }
+.sidebar .ui-tabs .ui-tabs-panel { padding: 0 }
+button.button { display: inline-block }
+button.clearbutton {
+  padding: 9px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+:placeholder-shown { font-style: italic }

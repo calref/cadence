@@ -7,44 +7,41 @@ powered by strophe.js.
 Requirements
 ------------
 
-* An XMPP server with Multi-User Chat and either BOSH or WebSocket
-  support is required to run cadence.
-* Python 2.7+ (or 3+) and GNU Make are required in the build process.
-* Optional JS and CSS compression uses the YUI Compressor utility.
-  Install it using your distribution's package manager or download
-  it here: https://github.com/yui/yuicompressor/releases
+* An XMPP server with Multi-User Chat and either BOSH or WebSocket.
+  [ejabberd](https://ejabberd.im/) is recommended, but any server should work.
+
+Building cadence requires the following tools:
+
+* GNU Make.
+* Python 3.5+. If your system's `python` command points to an outdated version,
+  be sure to use `make PYTHON=python3` to explicitly call the new interpreter.
+* The Node Package Manager, [npm](http://npmjs.com/). All other NPM dependencies
+  are installed automatically.
 
 Building
 --------
 
 ### Configuration
 
-First, run the configure script. The script can be executed from any
-location outside the source directory ("out-of-source") or directly inside
-("in source").
+First, create your configuration file from the template in `install.dist.yml`.
 
-These arguments are supported:
+#### configure.py
+
+The `configure.py` script will create this file automatically, but editing it
+manually allows additional configuration.
 
 ```
   -h, --help            show this help message and exit
   -s, --secure          Generate HTTPS or Secure WebSocket URLs
   --domain DOMAIN       XMPP domain to log in on.
+  --muc MUC             The MUC conference server to connect to. [conference.DOMAIN]
   --url URL             BOSH or WebSocket URL to connect to [PROTOCOL://HOST:PORT/PATH]
   --protocol            The protocol to connect through [http, https, ws, wss].
   --host                The host to connect to, if it differs from the XMPP domain [DOMAIN]
   --port                The port to connect to [5280, 5281].
   --path                The socket path on the server to connect to [/http-bind or /websocket].
   --session-auth AUTH   The URL to use for session authentication.
-  --muc MUC             The MUC conference server to connect to. [conference.DOMAIN]
-  --chatbot CHATBOT     The displayed name of the virtual ChatBot. ["Info"]
-  --title TITLE         The page title. ["cadence"]
-  --style STYLE         The default style. ["Stygium"]
-  --cdn-url CDN_URL     Base URL for resources. (Optional)
-  --prefix PREFIX       Directory to install cadence to ["."]
-  --cdn-prefix CDN_PREFIX
-                        Directory to install resources to [PREFIX]
-  --mode debug|aggregate|minify
-                        Whether to optimize JS/CSS files ["minify"]
+  --profile PROFILE     The installation profile to create or update [install.yml].
 ```
 
 * Only `--domain` is strictly required. `--muc` and `--url` are required if
@@ -54,38 +51,35 @@ These arguments are supported:
   system via [ejabberd-auth-php](https://github.com/cburschka/ejabberd-auth-php). It is
   the public URL of the `rpc.php` script in that software's session authentication plugin.
 
-* `--chatbot` and `--title` merely affect the client branding.
+If the installation profile already exists, it will be updated.
 
-* The `--prefix` is required to cleanly deploy the application to a directory.
-  (An in-source build is a functional installation, but an out-of-source build must
-  be installed before use, because static resources are not copied to the build location.)
+#### Manual configuration
 
-* The `--cdn-prefix` and `cdn-url` options are used to deploy the application's resources
-  to a CDN. If this is given, all but the index.html file are deployed there.
-  (You can also use the CDN for index.html file with `--prefix`, but this will make
-  the application harder to find, and will break session-authentication due to
-  cross-site security policies.
+After running `configure.py` (or copying `install.dist.yml` to `install.yml`)
+you can customize the configuration further.
 
-The `--mode` determines whether to aggregate and minify the scripts and stylesheets.
-For development, "debug" is recommended.
+The `config` key is merged into the default configuration that is defined in
+`config/default.yml`. All values there may be overridden here.
+
+The `install` key contains several directives for the setup scripts:
+
+* `target` and `cdn.target` designate directories where the files will be installed.
+  These are optional; the build directory is already a functional installation.
+
+* `styles` and `packs` define the stylesheets and emoticon packs. This list is
+  automatically generated from the contents of `assets/css/alt` and `emoticon-packs`.
 
 ### Make
 
-Then simply execute the Makefile.
+After configuring, simply execute the Makefile.
 
     $ make && make install
 
-Customizing the Settings
-------------------------
+To build from a custom profile:
 
-It is not recommended to edit `js/core/config.js` (if this file even exists, and has
-not been aggregated and minified), because it will be overwritten if the software
-is rebuilt from source.
+    $ make profile=<profile.yml> && make install
 
-Instead, the installer places a file named `config.custom.js` into the install directory
-along with your index.html file. Add any configuration changes to this file
-by assigning or deleting keys in the global `config` object.
-
+The profile otherwise defaults to the most recent one used, or `install.yml`.
 
 License
 -------

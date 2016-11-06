@@ -1,0 +1,23 @@
+config:
+  # Any configuration value from config/default.yml may be overridden here.
+  # ui:
+  #   title: cadence
+  xmpp:
+    # The domain of the XMPP server.
+    domain: ''
+    # The URL of the transport.
+    url: ''
+    # The domain of the conference server.
+    muc: ''
+    sessionAuth:
+
+install:
+  target:
+  cdn:
+    target:
+    url: ''
+
+  styles: [ ]
+  packs: [ ]
+  language: en
+  languages: [ ]
